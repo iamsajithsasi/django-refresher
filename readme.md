@@ -64,8 +64,9 @@ INSTALLED_APPS = [
 
 ### Migrate or create table using the created model
 
+```
 python3 manage.py makemigrations
-
 python3 manage.py migrate
+```
 
 ## Create RESTAPIs
