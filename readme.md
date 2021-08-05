@@ -32,23 +32,23 @@ python3 manage.py createsuperuser
 
 ```
 + models.py
-class SampleModel(models.Model):
-    title = models.CharField(max_length=100, default='', null=False)
-    description = models.TextField(null=True)
+    class SampleModel(models.Model):
+        title = models.CharField(max_length=100, default='', null=False)
+        description = models.TextField(null=True)
 
-    # for showing title in the admin tabs
-    def __str__(self):
-        return self.title
+        # for showing title in the admin tabs
+        def __str__(self):
+            return self.title
 
-    # for ordering
-    class Meta:
-        ordering = ["-title"]
+        # for ordering
+        class Meta:
+            ordering = ["-title"]
 
 + admin.py
-from .models import SampleModel
+    from .models import SampleModel
 
-# Register your model.
-admin.site.register(SampleModel)
+    # Register your model.
+    admin.site.register(SampleModel)
 ```
 
 ### Create Django API Interface
@@ -67,6 +67,22 @@ INSTALLED_APPS = [
 ```
 python3 manage.py makemigrations
 python3 manage.py migrate
+```
+
+### Customize modal table view in admin
+```
++admin.py
+    from django.contrib import admin
+    from .models import SampleModel
+    class SampleModalAdmin(admin.ModelAdmin):
+        list_display = ('title', 'info')
+
+        #change name of the columns and assign a value from object
+        def info(self, obj):
+            return obj.description
+
+    # Register your models here.
+    admin.site.register(SampleModel, SampleModalAdmin)
 ```
 
 ## Create RESTAPIs
