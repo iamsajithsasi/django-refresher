@@ -24,7 +24,7 @@ python3 manage.py createsuperuser
 
 ## Create App
 
-python3 manage.py startapp myapp
+`python3 manage.py startapp myapp`
 
 ## Create REST API
 
