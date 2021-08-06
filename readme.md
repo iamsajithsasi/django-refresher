@@ -69,13 +69,59 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-### Customize modal table view in admin
+### Customize admin
+
 ```
 +admin.py
     from django.contrib import admin
     from .models import SampleModel
+
+    @admin.display(empty_value='NA') # same as empty_value_display
     class SampleModalAdmin(admin.ModelAdmin):
-        list_display = ('title', 'info')
+        
+        # <-- Table -start->
+
+        # To display columns in table
+        list_display = ('title', 'info', year)
+
+        # To make a column item clickable link
+        list_display_links = ('info',)
+        
+        # To add a search field
+        search_fields = ['title', 'description']
+
+        # To add filters
+        list_filter = ('title', 'year')
+        
+        # To display the empty values
+        empty_value_display = 'NA'
+
+        # <-- Table -end->
+        # <-- Form -start->
+
+        # Group fields with an horizontal line
+        fields = (('title', 'description'), 'year')
+
+        # Group fields with an custom header (note: both fields and fieldsets cannot be at same time)
+        fieldsets = (
+            (None, {
+                'fields': ('title', 'description',)
+            }),
+            ('Other', {
+                'classes': ('collapse',), # wide -> without collapse button. +extrapretty
+                'fields': ('year',),
+            }),
+        )
+
+        # Exclude a field defined in model (excluded should not be added in fields)
+        exclude = ('year',)
+
+
+        # <-- Form -end->
+        # <-- Other -->
+
+        #Override any form field with text editor or any widget
+        formfield_overrides = { SampleModel.description: {'widget': RichTextEditorWidget},}
 
         #change name of the columns and assign a value from object
         def info(self, obj):
