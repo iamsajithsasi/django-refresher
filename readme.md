@@ -131,4 +131,34 @@ python3 manage.py migrate
     admin.site.register(SampleModel, SampleModalAdmin)
 ```
 
+## Add ckeditor
+
+```
++settings.py
+
+INSTALLED_APPS = [
+    ....
+    'ckeditor',
+]
+
+optional:
+CKEDITOR_CONFIGS = {
+    'default': {
+        # 'toolbar': 'Custom',
+        'width': '461px',
+        'height': 'auto',
+        # 'toolbar_Custom': [
+        #     ['Bold', 'Italic', 'Underline'],
+        #     ['NumberedList', 'BulletedList'],
+        # ],
+    }
+}
+
++models.py
+from ckeditor.fields import RichTextField
+
+class SampleModel(models.Model):
+    details = RichTextField(blank=True, null=True)
+```
+
 ## Create RESTAPIs
