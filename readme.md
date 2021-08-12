@@ -78,7 +78,7 @@ python3 manage.py migrate
 
     @admin.display(empty_value='NA') # same as empty_value_display
     class SampleModalAdmin(admin.ModelAdmin):
-        
+
         # <-- Table -start->
 
         # To display columns in table
@@ -86,13 +86,13 @@ python3 manage.py migrate
 
         # To make a column item clickable link
         list_display_links = ('info',)
-        
+
         # To add a search field
         search_fields = ['title', 'description']
 
         # To add filters
         list_filter = ('title', 'year')
-        
+
         # To display the empty values
         empty_value_display = 'NA'
 
@@ -161,4 +161,76 @@ class SampleModel(models.Model):
     details = RichTextField(blank=True, null=True)
 ```
 
-## Create RESTAPIs
+## Change Heading
+
+```
+admin.site.site_header = 'My App'
+```
+
+## Create RESTAPIs (Create app -> api)
+
+1. Create a model
+
+```
++models.py
+from django.db import models
+class ListModel(models.Model):
+
+    title = models.CharField(null=False)
+    description = models.TextField(null=True)
+
+    def __str__(self):
+        return self.title
+```
+
+2. Create Serializer
+
+```
+from rest_framework import serializers
+from .models import ListModel
+
+class ListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ListModel
+        fields = "__all__"
+```
+
+3. Create a view
+
+```
++views.py
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from .serializers import ListSerializer
+from .models import ListModel
+
+@api_view(['GET'])
+def ListView(request):
+    list = ListModel.objects.all()
+    serializer = ListSerializer(list, many=True)
+    return Response(serializer.data)
+```
+
+3. Define URL
+
+```
++urls.py
+from django.contrib import admin
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index),
+    path('list/', views.ListView),
+]
+```
+
+4. Register in admin
+
+```
++ admin.py
+from .models import ListModel
+
+# Register your models here.
+admin.site.register(ListModel)
+```
