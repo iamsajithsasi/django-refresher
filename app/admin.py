@@ -11,18 +11,18 @@ class SampleModalAdmin(admin.ModelAdmin):
     
     # empty_value_display = 'NA'
     
-    # fields = (('title', 'description'), 'year')
+    # fields = (('title', 'description', 'details'), 'year')
     
-    fieldsets = (
-        (None, {
-            'fields': ('title', 'description',)
-        }),
-        ('Other', {
-            'classes': ('wide', 'extrapretty'),
-            # 'classes': ('collapse'),
-            'fields': ('year',),
-        }),
-    )
+    # fieldsets = (
+    #     (None, {
+    #         'fields': ('title', 'description',)
+    #     }),
+    #     ('Other', {
+    #         'classes': ('wide', 'extrapretty'),
+    #         # 'classes': ('collapse'),
+    #         'fields': ('year',),
+    #     }),
+    # )
 
     # formfield_overrides = { SampleModel.description: {'widget': RichTextEditorWidget},}
 
