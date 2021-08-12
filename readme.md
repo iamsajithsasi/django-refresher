@@ -169,6 +169,8 @@ admin.site.site_header = 'My App'
 
 ## Create RESTAPIs (Create app -> api)
 
+### Initial API (List)
+
 1. Create a model
 
 ```
@@ -239,4 +241,76 @@ from .models import ListModel
 
 # Register your models here.
 admin.site.register(ListModel)
+```
+
+### Fetch a list by id
+
+```
++views.py
+
+@api_view(['GET'])
+def DetailView(request, id):
+    list = ListModel.objects.get(id=id)
+    serializer = ListSerializer(list, many=False)
+    return Response(serializer.data)
+
++urls.py
+
+urlpatterns = [
+    ...
+    path('list/<str:id>/', views.DetailView),
+]
+```
+
+### Create & Update
+
+```
++views.py
+
+@api_view(['POST'])
+def CreateView(request):
+    serializer = ListSerializer(data = request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
+@api_view(['POST'])
+def UpdateView(request, id):
+    list = ListModel.objects.get(id=id)
+    serializer = ListSerializer(instance = list, data = request.data)
+
+    if serializer.is_valid():
+        serializer.save()
+
+    return Response(serializer.data)
+
++urls.py
+
+urlpatterns = [
+    ...
+    path('create/', views.CreateView),
+    path('update/<str:id>/', views.UpdateView),
+]
+```
+
+### Delete
+
+```
++views.py
+
+@api_view(['DELETE'])
+def DeleteView(request, id):
+    list = ListModel.objects.get(id=id)
+    list.delete()
+
+    return Response("Item deleted success.")
+
++urls.py
+
+urlpatterns = [
+    ...
+    path('delete/<str:id>/', views.DeleteView),
+]
 ```
