@@ -173,6 +173,7 @@ admin.site.site_header = 'My App'
 
 ```
 +models.py
+
 from django.db import models
 class ListModel(models.Model):
 
@@ -186,6 +187,8 @@ class ListModel(models.Model):
 2. Create Serializer
 
 ```
++ serializers.py
+
 from rest_framework import serializers
 from .models import ListModel
 
@@ -199,6 +202,7 @@ class ListSerializer(serializers.ModelSerializer):
 
 ```
 +views.py
+
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .serializers import ListSerializer
@@ -215,6 +219,7 @@ def ListView(request):
 
 ```
 +urls.py
+
 from django.contrib import admin
 from django.urls import path
 from . import views
@@ -229,6 +234,7 @@ urlpatterns = [
 
 ```
 + admin.py
+
 from .models import ListModel
 
 # Register your models here.
