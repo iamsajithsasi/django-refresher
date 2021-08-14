@@ -58,7 +58,7 @@ pip3 install djangorestframework
 ```
 INSTALLED_APPS = [
     'rest_framework',
-    'myapp.apps.AppConfig',
+    'myapp.apps.MyappConfig',
     # go to myapp/apps.py file to get config name -> appname.apps.py.SnippetsConfigName
 ```
 
