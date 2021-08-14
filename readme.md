@@ -328,3 +328,9 @@ urlpatterns = [
     path('delete/<str:id>/', views.DeleteView),
 ]
 ```
+
+## Kill all process
+
+Error: port is already in use
+
+`killall -9 python3`
