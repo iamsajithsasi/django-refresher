@@ -28,7 +28,7 @@ python3 manage.py createsuperuser
 
 `python3 manage.py startapp myapp`
 
-## Create REST API
+## Create API (Django Admin)
 
 ### Create model # myapp -> models.py
 
