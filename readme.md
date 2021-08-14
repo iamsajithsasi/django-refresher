@@ -4,6 +4,8 @@ Django version 3.2.5
 
 djangorestframework-3.12.4
 
+os:ubuntu
+
 ## Ubuntu
 
 1. sudo apt-get install python3-venv
