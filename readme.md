@@ -28,6 +28,16 @@ python3 manage.py createsuperuser
 
 `python3 manage.py startapp myapp`
 
+## Register app in project
+
+```
++settings.py
+
+INSTALLED_APPS = [
+    'myapp.apps.MyappConfig',
+    # go to myapp/apps.py file to get config name -> appname.apps.py.SnippetsConfigName
+```
+
 ## Create API (Django Admin)
 
 ### Create model # myapp -> models.py
@@ -51,17 +61,6 @@ python3 manage.py createsuperuser
 
     # Register your model.
     admin.site.register(SampleModel)
-```
-
-### Create Django API Interface
-
-pip3 install djangorestframework
-
-```
-INSTALLED_APPS = [
-    'rest_framework',
-    'myapp.apps.MyappConfig',
-    # go to myapp/apps.py file to get config name -> appname.apps.py.SnippetsConfigName
 ```
 
 ### Migrate or create table using the created model
@@ -170,6 +169,17 @@ admin.site.site_header = 'My App'
 ```
 
 ## Create RESTAPIs (Create app -> api)
+
+### Setup django-rest-framework
+
+pip3 install djangorestframework
+
+```
+INSTALLED_APPS = [
+    'rest_framework',
+    ...
+]
+```
 
 ### Initial API (List)
 
