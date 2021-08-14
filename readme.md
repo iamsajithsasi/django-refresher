@@ -232,7 +232,21 @@ urlpatterns = [
 ]
 ```
 
-4. Register in admin
+4. Register the URLs in the project
+
+```
+from django.contrib import admin
+from django.urls import path, include
+from rest_framework import routers
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('api/', include("api.urls")),
+    ...
+]
+```
+
+5. Register in admin
 
 ```
 + admin.py
