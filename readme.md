@@ -70,7 +70,7 @@ python3 manage.py makemigrations
 python3 manage.py migrate
 ```
 
-### Customize admin
+## Customize admin
 
 ```
 +admin.py
@@ -343,7 +343,7 @@ urlpatterns = [
 ]
 ```
 
-## Kill all process
+## Utils
 
 Error: port is already in use
 
