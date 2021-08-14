@@ -232,9 +232,11 @@ urlpatterns = [
 ]
 ```
 
-4. Register the URLs in the project
+4. Register the app URLs in the project
 
 ```
++urls.py
+
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
