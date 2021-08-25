@@ -22,5 +22,8 @@ from rest_framework import routers
 urlpatterns = [
     path('', include("app.urls")),
     path('api/', include("api.urls")),
+    path('poesa/api/', include("poesa.urls")),
     path('admin/', admin.site.urls),
 ]
+
+admin.site.site_header = 'My admin'
