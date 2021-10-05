@@ -40,7 +40,7 @@ def CreateView(request):
     
     return Response(serializer.data)
 
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 def UpdateView(request, id):
     list = ListModel.objects.get(id=id)
     serializer = ListSerializer(instance = list, data = request.data)
