@@ -194,6 +194,10 @@ class ListModel(models.Model):
     title = models.CharField(null=False)
     description = models.TextField(null=True)
 
+
+    class Meta:
+        unique_together = ['title', 'description']
+        
     def __str__(self):
         return self.title
 ```
